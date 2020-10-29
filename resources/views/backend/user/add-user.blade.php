@@ -134,5 +134,5 @@
         }
       });
     });
-    </script>
+</script>
 @endsection

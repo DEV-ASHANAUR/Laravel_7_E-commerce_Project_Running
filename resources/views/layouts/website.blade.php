@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
+    <script src="{{ asset('backend') }}/js/jquery.js"></script>
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('fontend') }}/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/css/font-awesome.min.css" type="text/css">
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('fontend') }}/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/css/style.css" type="text/css">
+    {{-- <script src="{{ asset('fontend') }}/js/jquery-3.3.1.min.js"></script> --}}
 </head>
 
 <body>
@@ -142,7 +143,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="{{ asset('fontend') }}/js/jquery-3.3.1.min.js"></script>
+    {{-- <script src="{{ asset('fontend') }}/js/jquery-3.3.1.min.js"></script> --}}
     <script src="{{ asset('fontend') }}/js/bootstrap.min.js"></script>
     <script src="{{ asset('fontend') }}/js/jquery-ui.min.js"></script>
     <script src="{{ asset('fontend') }}/js/jquery.countdown.min.js"></script>
@@ -152,6 +153,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{ asset('fontend') }}/js/jquery.slicknav.js"></script>
     <script src="{{ asset('fontend') }}/js/owl.carousel.min.js"></script>
     <script src="{{ asset('fontend') }}/js/main.js"></script>
+    <script src="{{ asset('backend') }}/js/jquery.validate.min.js"></script>
+    <script src="{{ asset('backend') }}/js/additional-methods.min.js"></script>
     <script src="{{ asset('backend') }}/js/toastr.min.js"></script>
     <script>
         @if(Session::has('message'))

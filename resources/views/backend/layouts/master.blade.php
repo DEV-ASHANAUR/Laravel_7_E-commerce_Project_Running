@@ -84,6 +84,7 @@
             
             @yield('content')
         </div>
+        {{-- <script src="{{ asset('backend') }}/js/jquery.js"></script> --}}
         <script src="{{ asset('backend') }}/js/scripts.js"></script>
         <script src="{{ asset('backend') }}/js/Chart.min.js"></script>
         <script src="{{ asset('backend') }}/js/bootstrap.bundle.min.js"></script>

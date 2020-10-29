@@ -37,6 +37,11 @@ Route::get('/show-cart', 'CartController@showcart')->name('cart.show');
 Route::post('/update-cart', 'CartController@upcart')->name('cart.update');
 Route::get('/remove-cart/{rowId}', 'CartController@removecart')->name('cart.remove');
 
+//customer signup
+Route::get('cus/login/page','Customer@login')->name('customer.login');
+Route::get('cus/reg/page','Customer@reg')->name('customer.reg');
+Route::post('cus/reg/store','Customer@regstore')->name('customer.registation');
+
 //backend route
 
 Route::group(['middleware' => 'auth'], function () {

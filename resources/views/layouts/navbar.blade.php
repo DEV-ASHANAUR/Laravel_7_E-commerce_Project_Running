@@ -97,7 +97,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="si-close">
-                                                    <i class="ti-close"></i>
+                                                    <a href="{{ route('cart.remove',$content->rowId) }}"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             @php
