@@ -25,8 +25,9 @@
                                 <label for="usertype">User Role</label>
                                 <select class="form-control" name="usertype" id="usertype">
                                     <option value="">Select Role</option>
-                                    <option value="Admin" {{ ($editdata->usertype == "Admin")?"selected":"" }}>Admin</option>
-                                    <option value="User" {{ ($editdata->usertype == "User")?"selected":"" }}>User</option>
+                                    <option value="admin" {{ ($editdata->usertype == "admin")?"selected":"" }}>Admin</option>
+                                    <option value="user" {{ ($editdata->usertype == "user")?"selected":"" }}>User</option>
+                                    <option value="customer" {{ ($editdata->usertype == "customer")?"selected":"" }}>Customer</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">

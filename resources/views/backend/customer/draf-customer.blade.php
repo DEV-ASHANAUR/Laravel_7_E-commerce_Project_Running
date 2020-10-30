@@ -14,7 +14,7 @@
             </div> --}}
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="fas fa-table mr-1"></i>View Customers</span>
+                    <span><i class="fas fa-table mr-1"></i>Draf Customers</span>
                     {{-- <small class="d-sm-block"><a href="{{ route('users.add') }}" class="btn btn-success btn-sm"><i class="fas fa-plus-circle mr-1"></i> Add User</a></small> --}}
                 </div>
                 <div class="card-body">
@@ -26,16 +26,27 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
+                                    <th>Draf Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
                                 @foreach ($customer as $key => $customer)
+                                @php
+                                    $created = new Carbon\carbon($customer->created_at);
+                                    $now = Carbon\Carbon::now();
+                                    $difference = ($created->diff($now)->days <1)?'Today':$created->diffForHumans($now);
+                                @endphp
                                 <tr id="{{ $customer->id }}">
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $customer->name }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->mobile }}</td>
+                                    <td>{{ $difference }}</td>
+                                    <td>
+                                        <a href="{{ route('users.delete') }}" id="delete" title="Delete" data-id="{{ $customer->id }}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-1"></i></a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -45,6 +56,8 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
+                                    <th>Draf Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>

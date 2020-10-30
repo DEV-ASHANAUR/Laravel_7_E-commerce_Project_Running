@@ -10,7 +10,7 @@ class UserController extends Controller
     //view user method
     public function view()
     {
-        $data['alldata'] = User::all();
+        $data['alldata'] = User::whereNotIn('usertype',['customer'])->get();
         $id = Auth::user()->id;
         return view('backend.user.view-user',$data,compact('id'));
     }
@@ -90,14 +90,14 @@ class UserController extends Controller
                 'message'=>'Successfully Delete',
                 'alert-type'=>'success'
             );
-            return redirect()->route('users.view')->with($notification);
+            return redirect()->back()->with($notification);
         }else{
             $notification=array(
                 'message'=>'Something went worng!',
                 'alert-type'=>'error'
             );
             //return Redirect()->back()->with($notification);
-            return redirect()->route('users.view')->with($notification);
+            return redirect()->back()->with($notification);
         }
     }
 }

@@ -9,6 +9,18 @@ use DB;
 
 class Customer extends Controller
 {
+    //view customer
+    public function view()
+    {
+        $customer = User::where('usertype','customer')->where('status','1')->get();
+        return view('backend.customer.view-customer',compact('customer'));
+    }
+    //draf customer
+    public function draf()
+    {
+        $customer = User::where('usertype','customer')->where('status','0')->get();
+        return view('backend.customer.draf-customer',compact('customer'));
+    }
     //login
     public function login()
     {
@@ -51,9 +63,39 @@ class Customer extends Controller
             });
         });
         $notification=array(
-            'message'=>'Successfully Sign Up',
+            'message'=>'Successfully Sign Up.Pelase Verify Your Email',
             'alert-type'=>'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('email.verify')->with($notification);
     }
+    //email verify
+    public function emailverify()
+    {
+        return view('website.verify');
+    }
+    //email check
+    public function verifyCheck(Request $request)
+    {
+        $this->validate($request,[
+            'email' => 'required',
+            'code' => 'required'
+        ]); 
+        $checkData = User::where('email',$request->email)->where('code',$request->code)->first();
+        if($checkData){
+            $checkData->status = '1';
+            $checkData->save();
+            $notification=array(
+                'message'=>'Verification  Successfully Done! Please Login!',
+                'alert-type'=>'success'
+            );
+            return redirect()->route('customer.login')->with($notification);
+        }else{
+            $notification=array(
+                'message'=>'Error, Sorry Your Email And Verification Code Does Not Match!',
+                'alert-type'=>'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
+
 }

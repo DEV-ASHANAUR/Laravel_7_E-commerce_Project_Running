@@ -41,6 +41,10 @@ Route::get('/remove-cart/{rowId}', 'CartController@removecart')->name('cart.remo
 Route::get('cus/login/page','Customer@login')->name('customer.login');
 Route::get('cus/reg/page','Customer@reg')->name('customer.reg');
 Route::post('cus/reg/store','Customer@regstore')->name('customer.registation');
+Route::get('email/verify','Customer@emailverify')->name('email.verify');
+Route::post('email/verify/check','Customer@verifyCheck')->name('email.check');
+
+
 
 //backend route
 
@@ -54,6 +58,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/update/{id}', 'Backend\UserController@update')->name('users.update');
         Route::post('/delete', 'Backend\UserController@delete')->name('users.delete');
     });
+    //manage customer route
+    Route::group(['prefix' => 'customer'], function () {
+        Route::get('/view/customer', 'Customer@view')->name('customer.view');
+        Route::get('/draf/customer', 'Customer@draf')->name('customer.draf');
+        Route::post('/delete', 'Customer@delete')->name('customer.delete');
+    });
     // manage profile route
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/view', 'Backend\ProfileController@view')->name('profile.view');
@@ -62,8 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/pass/view', 'Backend\ProfileController@passview')->name('profile.pass.view');
         Route::post('/pass/change', 'Backend\ProfileController@passchange')->name('profile.pass.change');
     });
-    
-    
+    //manage unit
     Route::group(['prefix' => 'units'], function () {
         Route::get('/view', 'Backend\UnitController@view')->name('units.view');
         Route::get('/add', 'Backend\UnitController@add')->name('units.add');
