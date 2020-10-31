@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'FontendController@home')->name('website.home');
 Route::get('/shop', 'FontendController@shop')->name('website.shop');
@@ -43,12 +43,15 @@ Route::get('cus/reg/page','Customer@reg')->name('customer.reg');
 Route::post('cus/reg/store','Customer@regstore')->name('customer.registation');
 Route::get('email/verify','Customer@emailverify')->name('email.verify');
 Route::post('email/verify/check','Customer@verifyCheck')->name('email.check');
-
-
+//customer dashboard
+Route::group(['middleware' => ['auth','customer']], function () {
+    Route::get('/customer/dashboard/','CustomerDashboard@index')->name('customer.dashboard');
+});
 
 //backend route
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','admin']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
     //manage user route
     Route::group(['prefix' => 'users'], function () {
         Route::get('/view', 'Backend\UserController@view')->name('users.view');

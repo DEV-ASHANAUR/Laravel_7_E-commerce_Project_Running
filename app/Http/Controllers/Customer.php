@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Mail;
 use DB;
+use Auth;
 
 class Customer extends Controller
 {
@@ -24,7 +25,12 @@ class Customer extends Controller
     //login
     public function login()
     {
-        return view('website.cus_login');
+        if(Auth::user()->id !=null){
+            return redirect()->route('login');
+        }else{
+            return view('website.cus_login');
+        }
+        
     }
     //registation
     public function reg()

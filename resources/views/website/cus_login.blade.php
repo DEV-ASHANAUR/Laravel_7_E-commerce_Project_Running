@@ -22,23 +22,40 @@
             <div class="col-lg-6 offset-lg-3">
                 <div class="login-form">
                     <h2>Login</h2>
-                    <form action="#">
-                        <div class="group-input">
-                            <label for="username">Username or email address *</label>
-                            <input type="text" id="username">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        @if (Session::get('meaasge'))
+                            <div class="alert alert-danger">
+                                <span class="text-center">{{ Session::get('meaasge') }}</span>
+                            </div>
+                        @endif
+                        <div class="group-input form-group">
+                            <label for="email">Email Address *</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+                            @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
-                        <div class="group-input">
-                            <label for="pass">Password *</label>
-                            <input type="text" id="pass">
+                        <div class="group-input form-group">
+                            <label for="password">Password *</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                         <div class="group-input gi-check">
                             <div class="gi-more">
-                                <label for="save-pass">
-                                    Save Password
-                                    <input type="checkbox" id="save-pass">
+                                <label for="remember">
+                                    Remember Me
+                                    <input type="checkbox" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
-                                <a href="#" class="forget-pass">Forget your Password</a>
+                                <a href="{{ route('password.request') }}"" class="forget-pass">Forget your Password</a>
                             </div>
                         </div>
                         <button type="submit" class="site-btn login-btn">Sign In</button>
